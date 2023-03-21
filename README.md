@@ -1,5 +1,3 @@
 # 370Project
 
 hi
-
-hello!
