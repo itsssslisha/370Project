@@ -1,3 +1,0 @@
-# 370Project
-
-hi
