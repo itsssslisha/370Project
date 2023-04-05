@@ -6,15 +6,22 @@ public class Item {
     private Integer quantity;
     private String sellBy;
     private Boolean Used;
+    private Integer itemID;
 
-    public Item(){}
-    public Item(String n, Integer c, Integer q, String sb, Boolean u) {
-        name = n;
-        cost = c;
-        quantity = q;
-        sellBy = sb;
-        Used = u;
+    public Item(){
+        itemID = new getItemId().nextItemID();
     }
+
+    public Integer getItemID() {
+        return itemID;
+    }
+//    public Item(String n, Integer c, Integer q, String sb, Boolean u, Integer id) {
+//        name = n;
+//        cost = c;
+//        quantity = q;
+//        sellBy = sb;
+//        Used = u;
+//    }
 
 
 
