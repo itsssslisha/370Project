@@ -9,8 +9,7 @@ public class getAisleId {
         } else {
             sectionMap.put(sectionId, 1);
         }
-        _aisleId = String.valueOf(sectionId) + "" + sectionMap.get(sectionId);
-
+        _aisleId = sectionId + "" + sectionMap.get(sectionId);
         return _aisleId;
     }
 }

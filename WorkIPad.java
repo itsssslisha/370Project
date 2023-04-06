@@ -9,7 +9,6 @@ public class WorkIPad implements Observer{
     }
     public void Notify(Item item) {
         System.out.println("Mobile ALERT:");
-        System.out.println("    New Item Created: " + item.getItemID());
+        System.out.println("    New Item Created: " + item.getName() + ": " + item.getPrice());
     }
-
 }

@@ -1,6 +1,3 @@
-import Categories.Category;
-import Conditions.Condition;
-
 public class Item {
 
     private Integer itemID;
@@ -10,14 +7,21 @@ public class Item {
     private Double Price;
     public Item(String name, Double Price, Category category, Condition condition){
         this.Price = Price;
+        this.name = name;
         itemID = new getItemId().nextItemID();
-        System.out.println(name);
-        System.out.println("$" + Price);
-        category.showCategory();
-        condition.itemCondition();
-        System.out.println("");
+        this.category = category;
+        this.condition = condition;
+    }
+    public String getName() {
+        return name;
     }
 
+    public Double getPrice() {
+        return Price;
+    }
+    public String getPriceInDollar() {
+        return "$" + String.format("%.2f", getPrice());
+    }
     public Integer getItemID() {
         return itemID;
     }

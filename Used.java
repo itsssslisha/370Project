@@ -1,5 +1,3 @@
-package Conditions;
-
 public class Used implements Condition {
     @Override
     public void itemCondition() {
