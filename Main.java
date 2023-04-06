@@ -10,8 +10,8 @@ public class Main {
         warehouse.addAisle('A', new Aisle());
         warehouse.addAisle('B', new Aisle());
         warehouse.addAisle('B', new Aisle());
-        warehouse.addItem("A1", new Item("HDD", new Hardware(), new Mint()));
-        warehouse.addItem("A1", new Item("Screw", new Hardware(), new Mint()));
+        warehouse.addItem("A1", new Item());
+        warehouse.addItem("A1", new Item());
 
 
     }
