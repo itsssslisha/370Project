@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 
-public class Warehouse {
+//added "implements IteratorForSection"-Edwin
+public class Warehouse implements IteratorForSection {
     private ArrayList<Section> section = new ArrayList<Section>();
     public Item findItem(){
         // given the item id, find the section num and aisle num
         // iterator pattern
         return null;
     }
-
+    
     public void removeSection(char sectionID) {
-       // System.out.println("Num Sections " + section.size());
+        System.out.println("Num Sections " + section.size());
         section.remove(getSection(sectionID));
-       // System.out.println("Num Sections " + section.size());
+        System.out.println("Num Sections " + section.size());
     }
     public void removeAisle(String aisleID) {
         char sectionID = aisleID.charAt(0);
@@ -70,9 +71,52 @@ public class Warehouse {
         return null;
     }
 
-    public String Invoice(){
-        return "";
+    
+    //Added PrintInvoice-Edwin
+    public void printInvoice(){
+        for (Iterator iterator = this.getSectionIterator(); iterator.hasNext();) {
+            Section section = (Section) iterator.next();
+            System.out.println("Section " + section.getSectionId() + ":");
+            for (Iterator iterator2 = section.getAisleIterator(); iterator2.hasNext();) {
+                Aisle aisle = (Aisle) iterator2.next();
+                System.out.println("Aisle " + aisle.getAisleId() + ":");
+                for (Iterator iterator3 = aisle.getItemIterator(); iterator3.hasNext();) {
+                    Item item = (Item) iterator3.next();
+                    System.out.println("Item " + item.getItemID() + ":");
+                }
+            }
+        }
     }
+    
 
+//NEWLY ADDED-Edwin
+    //Section Iterator
+    @Override
+    public Iterator getSectionIterator() {
+        return new SectionIterator();
+
+    }
+    
+    //Added class-Edwin
+    private class SectionIterator implements Iterator{
+
+        int index;
+
+        @Override
+        public boolean hasNext() {
+            if(index < section.size()){
+                return true;
+            }
+            return false;
+        }
+
+        @Override
+        public Object next() {
+            if(this.hasNext()){
+                return section.get(index++);
+            }
+            return null;
+        }
+    }
 
 }

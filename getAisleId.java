@@ -1,9 +1,17 @@
+import java.util.HashMap;
+
 public class getAisleId {
-    private static int _aisleNum = 0;
-    private static String _aisleId;
+
+    private static HashMap<Character, Integer> sectionMap = new HashMap<Character, Integer>();
+    private  String _aisleId;
     public String getNextId(char sectionId) {
-        _aisleNum++;
-        _aisleId = String.valueOf(sectionId) + "" + _aisleNum;
+        if (sectionMap.containsKey(sectionId)) {
+            sectionMap.put(sectionId, sectionMap.get(sectionId) + 1);
+        } else {
+            sectionMap.put(sectionId, 1);
+        }
+        _aisleId = String.valueOf(sectionId) + "" + sectionMap.get(sectionId);
+
         return _aisleId;
     }
 
