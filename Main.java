@@ -3,7 +3,9 @@ public class Main {
         Warehouse warehouse = new Warehouse();
         warehouse.addSection(new Section());
         warehouse.addSection(new Section());
+        warehouse.addAisle('A', new Aisle());
         warehouse.addAisle('B', new Aisle());
-        warehouse.addItem("B1", new Item());
+        warehouse.addAisle('B', new Aisle());
+        // warehouse.addItem("B1", new Item());
     }
 }
