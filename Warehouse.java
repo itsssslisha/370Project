@@ -1,13 +1,36 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Warehouse {
     private ArrayList<Section> section = new ArrayList<Section>();
+    private List<Observer> listeners = new ArrayList<>();
     public Item findItem(){
         // given the item id, find the section num and aisle num
         // iterator pattern
         return null;
     }
 
+    public void addListener(Observer o) {
+        listeners.add(o);
+    }
+    public void removeListener(Observer o) {
+        listeners.remove(o);
+    }
+    public void Notify(Section section) {
+        for (Observer o: listeners) {
+            o.Notify(section);
+        }
+    }
+    public void Notify(Aisle aisle) {
+        for (Observer o: listeners) {
+            o.Notify(aisle);
+        }
+    }
+    public void Notify(Item item) {
+        for (Observer o: listeners) {
+            o.Notify(item);
+        }
+    }
     public void removeSection(char sectionID) {
        // System.out.println("Num Sections " + section.size());
         section.remove(getSection(sectionID));
@@ -29,16 +52,19 @@ public class Warehouse {
     public void addSection(Section newSection){
         this.section.add(newSection);
         System.out.println(newSection.getSectionId());
+        Notify(newSection);
     }
 
     public void addAisle(char sectionID, Aisle a) {
         a.setAisleId(new getAisleId().getNextId(sectionID));
         getSection(sectionID).addAisleToSection(a);
         System.out.println(a.getAisleId());
+        Notify(a);
     }
 
     public void addItem(String aisleID, Item i) {
         getAisle(aisleID).addItem(i);
+        Notify(i);
     }
 
     // These 3 get functions to be private for final version

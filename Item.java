@@ -1,27 +1,24 @@
 import java.net.Inet4Address;
 
 public class Item {
+    private int itemID;
     private String name;
-    private Integer cost;
-    private Integer quantity;
-    private String sellBy;
-    private Boolean Used;
-    private Integer itemID;
+    private Category category;
+    private Status status;
 
-    public Item(){
+
+    public Item(String s, Category c, Status status){
+        name = s;
         itemID = new getItemId().nextItemID();
+        category = c;
+        this.status = status;
+       // category.showCategory();
     }
 
     public Integer getItemID() {
         return itemID;
     }
-//    public Item(String n, Integer c, Integer q, String sb, Boolean u, Integer id) {
-//        name = n;
-//        cost = c;
-//        quantity = q;
-//        sellBy = sb;
-//        Used = u;
-//    }
+
 
 
 
