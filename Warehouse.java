@@ -1,10 +1,13 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Warehouse implements IteratorForSection{
+public class Warehouse implements IteratorForSection, Observable {
     private ArrayList<Section> section = new ArrayList<Section>();
     private List<Observer> listeners = new ArrayList<>();
 
+    public String getNumListeners() {
+        return "Amount of Listeners is " + listeners.size();
+    }
     public void addListener(Observer o) {
         listeners.add(o);
     }
@@ -72,7 +75,7 @@ public class Warehouse implements IteratorForSection{
         }
     }
 
-    private Section getSection(char sectionID) {
+    public Section getSection(char sectionID) {
         for (Section s : this.section) {
             if (s.getSectionId() == sectionID) {
                 return s;
@@ -81,7 +84,7 @@ public class Warehouse implements IteratorForSection{
         throw new IllegalWarehouseException("UNKNOWN SECTION ERROR: Section Does Not Exist!");
     }
 
-    private Aisle getAisle(String aisleID) {
+    public Aisle getAisle(String aisleID) {
         char sectionID = aisleID.charAt(0);
         for (Aisle a : getSection(sectionID).getAisles()) {
             if (a.getAisleId().equals(aisleID)) {
@@ -91,7 +94,7 @@ public class Warehouse implements IteratorForSection{
         throw new IllegalWarehouseException("UNKNOWN AISLE ERROR: Aisle Does Not Exist!");
     }
 
-    private Item getItem(String aisleID, int itemID){
+    public Item getItem(String aisleID, int itemID){
         for (Item i: getAisle(aisleID).getItems()) {
             if (i.getItemID() == itemID) {
                 return i;
@@ -100,29 +103,42 @@ public class Warehouse implements IteratorForSection{
         throw new IllegalWarehouseException("UNKNOWN ITEM ERROR: Item Does Not Exist!");
     }
 
-    public void printInvoice(){
+    public String printInvoice(){
+         StringBuilder sb = new StringBuilder();
+
         for (Iterator iterator = this.getSectionIterator(); iterator.hasNext();) {
             Section section = (Section) iterator.next();
-            System.out.println("Section " + section.getSectionId() + ":");
+            sb.append("Section " + section.getSectionId() + ":\n");
+            //System.out.println("Section " + section.getSectionId() + ":");
             for (Iterator iterator2 = section.getAisleIterator(); iterator2.hasNext();) {
                 Aisle aisle = (Aisle) iterator2.next();
-                System.out.println("    Aisle " + aisle.getAisleId() + ":");
+                sb.append("    Aisle " + aisle.getAisleId() + ":\n");//System.out.println("    Aisle " + aisle.getAisleId() + ":");
                 for (Iterator iterator3 = aisle.getItemIterator(); iterator3.hasNext();) {
                     Item item = (Item) iterator3.next();
-                    System.out.println("        Item " + item.getItemID() + ": "+ item.getName() + " - " + item.getPriceInDollar());
+                    sb.append("        Item " + item.getItemID() + ": "+ item.getName() + " - " + item.getPriceInDollar()+"\n");
+                    //System.out.println("        Item " + item.getItemID() + ": "+ item.getName() + " - " + item.getPriceInDollar());
                 }
             }
         }
+        return sb.toString();
     }
 
-    public void printSection() {
+    public String printSection() {
+        StringBuilder stringBuilder = new StringBuilder();
         for (Iterator iterator = this.getSectionIterator(); iterator.hasNext(); ) {
             Section section = (Section) iterator.next();
-            if (iterator.hasNext())System.out.print("Section " + section.getSectionId() + ", ");
-            else System.out.print("Section " + section.getSectionId());
+            if (iterator.hasNext()){
+                stringBuilder.append("Section " + section.getSectionId() + ", \n");
+                //System.out.print("Section " + section.getSectionId() + ", ");
+            }
+            else {
+                stringBuilder.append("Section " + section.getSectionId() + "\n");
+               // System.out.print("Section " + section.getSectionId());
+            }
         }
-        System.out.println();
+        return stringBuilder.toString();
     }
+
 
     public void printAisle(char sectionID) {
         System.out.print("Section " + sectionID + " has the following Aisles: ");

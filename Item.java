@@ -1,5 +1,4 @@
 public class Item {
-
     private Integer itemID;
     private String name;
     private Category category;
